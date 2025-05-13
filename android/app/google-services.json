@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "972586179067",
+    "project_id": "fitnessai-2131b",
+    "storage_bucket": "fitnessai-2131b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972586179067:android:0405ec3a43960934b0935e",
+        "android_client_info": {
+          "package_name": "expo.android.package"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVRbrcJt5Avg6kt0fbKgmdb4mtKljRvA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
