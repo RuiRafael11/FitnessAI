@@ -1,6 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
-import { ImageManipulator } from 'expo-image-manipulator';
+import * as ImageManipulator from 'expo-image-manipulator';
 import React, { useRef, useState } from 'react';
 import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { getFoodByName, saveMeal } from '../services/firebase';
@@ -16,11 +16,11 @@ interface CameraScreenProps {
 }
 
 export const CameraScreen: React.FC<CameraScreenProps> = ({ userId, onFoodDetected }) => {
-  const [type, setType] = useState(CameraType.back);
+  const [type, setType] = useState<'front' | 'back'>('back');
   const [permission, requestPermission] = Camera.useCameraPermissions();
-  const [torch, setTorch] = useState(false);
+  const [torch, setTorch] = useState<'on' | 'off'>('off');
   const [scanning, setScanning] = useState(false);
-  const cameraRef = useRef<Camera>(null);
+  const cameraRef = useRef<Camera | null>(null);
 
   if (!permission) {
     return (
@@ -42,11 +42,11 @@ export const CameraScreen: React.FC<CameraScreenProps> = ({ userId, onFoodDetect
   }
 
   const toggleCameraType = () => {
-    setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));
+    setType(current => (current === 'back' ? 'front' : 'back'));
   };
 
   const toggleTorch = () => {
-    setTorch(current => !current);
+    setTorch(current => (current === 'on' ? 'off' : 'on'));
   };
 
   const analyzeImage = async (base64Image: string) => {
@@ -140,11 +140,11 @@ export const CameraScreen: React.FC<CameraScreenProps> = ({ userId, onFoodDetect
         ref={cameraRef}
         style={styles.camera}
         type={type}
-        flashMode={torch ? 'torch' : 'off'}>
+        flashMode={torch}>
         <View style={styles.controls}>
           <TouchableOpacity style={styles.button} onPress={toggleTorch}>
             <MaterialIcons
-              name={torch ? 'flash-on' : 'flash-off'}
+              name={torch === 'on' ? 'flash-on' : 'flash-off'}
               size={24}
               color="white"
             />
